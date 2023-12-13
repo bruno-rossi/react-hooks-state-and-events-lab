@@ -5,23 +5,29 @@ function ShoppingList({ items }) {
 
   const [selectedCategory, setCategory] = useState("All");
 
-  // Define handleFilter function to set the category according to the 
+  // Define handleFilter function to set the category according to the select element's value:
   function handleFilter(event) {
-    setCategory(category => category = event.target.value);
+    // setCategory(category => category = event.target.value);
+    setCategory(event.target.value);
   }
 
   const filteredItems = items.filter((item => {
-    if (selectedCategory === "All") {
-      return true;
-    } else {
-      return item.category === selectedCategory;
-    }
+    // if (selectedCategory === "All" ) {
+    //   return true;
+    // } else {
+    //   return item.category === selectedCategory;
+    // }
+
+    return selectedCategory === "All" || item.category === selectedCategory;
+
   }));
+
+  console.log(filteredItems);
 
   return (
     <div className="ShoppingList">
       <div className="Filter">
-        <select name="filter" onChange={event => handleFilter(event)}>
+        <select name="filter" onChange={event => handleFilter(event)} value={selectedCategory}>
           <option value="All">Filter by category</option>
           <option value="Produce">Produce</option>
           <option value="Dairy">Dairy</option>
